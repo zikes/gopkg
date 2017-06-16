@@ -5,6 +5,7 @@ A Caddy plugin to add gopkg-like functionality to your own web sites.
 # Usage
 
 `gopkg [path] [repo-uri]`
+
 `gopkg [path] [vcs] [repo-uri]`
 
 ```
