@@ -80,6 +80,20 @@ func (g GopkgHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, er
 }
 
 func setup(c *caddy.Controller) error {
+	configs, err := parse(c)
+	if err != nil {
+		return err
+	}
+	httpserver.GetConfig(c).AddMiddleware(func(next httpserver.Handler) httpserver.Handler {
+		return GopkgHandler{
+			Configs: configs,
+			Next:    next,
+		}
+	})
+	return nil
+}
+
+func parse(c *caddy.Controller) ([]Config, error) {
 	var configs []Config
 
 	for c.Next() {
@@ -87,7 +101,7 @@ func setup(c *caddy.Controller) error {
 		args := c.RemainingArgs()
 
 		if len(args) != 2 && len(args) != 3 {
-			return c.ArgErr()
+			return configs, c.ArgErr()
 		}
 
 		cfg := Config{
@@ -105,11 +119,5 @@ func setup(c *caddy.Controller) error {
 		configs = append(configs, cfg)
 	}
 
-	httpserver.GetConfig(c).AddMiddleware(func(next httpserver.Handler) httpserver.Handler {
-		return GopkgHandler{
-			Configs: configs,
-			Next:    next,
-		}
-	})
-	return nil
+	return configs, nil
 }
