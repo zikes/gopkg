@@ -1,9 +1,9 @@
-package gopkg
+package gopkg // import github.com/zikes/gopkg
 
 import (
 	"testing"
 
-	"github.com/mholt/caddy"
+	"github.com/caddyserver/caddy"
 )
 
 func TestGopkgConfig(t *testing.T) {

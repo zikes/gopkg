@@ -3,14 +3,14 @@
 //     gopkg [path] [vcs-type] [uri]
 //     gopkg [path] [uri]
 
-package gopkg
+package gopkg // import github.com/zikes/gopkg
 
 import (
 	"html/template"
 	"net/http"
 
-	"github.com/mholt/caddy"
-	"github.com/mholt/caddy/caddyhttp/httpserver"
+	"github.com/caddyserver/caddy"
+	"github.com/caddyserver/caddy/caddyhttp/httpserver"
 )
 
 func init() {
