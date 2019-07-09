@@ -3,7 +3,7 @@ package gopkg
 import (
 	"testing"
 
-	"github.com/mholt/caddy"
+	"github.com/caddyserver/caddy"
 )
 
 func TestGopkgConfig(t *testing.T) {
